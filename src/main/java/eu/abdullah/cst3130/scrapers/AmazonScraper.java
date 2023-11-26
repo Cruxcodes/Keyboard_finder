@@ -29,10 +29,8 @@ public class AmazonScraper extends Thread {
         HibernateMapping hibernateMapping = new HibernateMapping();
         hibernateMapping.init();
         WebDriver driver = new ChromeDriver(this.chromeOptions);
-//        driver.get("https://www.amazon.co.uk/s?bbn=340831031&rh=n%3A13978270031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&rd=1&ref=Oct_d_odnav_428654031");
         driver.get("https://www.amazon.co.uk/s?i=computers&bbn=340831031&rh=n%3A13978270031%2Cp_89%3ACorsair%7CLogitech+G%7CRazer%7CSteelSeries&dc&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&qid=1700920911&rd=1&rnid=1632651031&ref=sr_nr_p_89_4&ds=v1%3AFUYc8%2BNFlxitTZuoCq3WtF%2B7LPrRIpkUZH6fD2t192U");
 
-//        List<WebElement> elementList = driver.findElements(By.cssSelector("[data-qa='ck-product-box']"));
         try {
             Thread.sleep(3000);
         } catch (Exception ex) {
@@ -40,16 +38,15 @@ public class AmazonScraper extends Thread {
         }
 
         //This is the button for accepting all cookies.
-
         WebElement acceptCookies = driver.findElement(By.id("sp-cc-accept"));
         acceptCookies.click();
+
         try {
             Thread.sleep(4000);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-//        List<WebElement> productList = driver.findElements(By.cssSelector("div.a-section.a-spacing-base"));
 
         /**The number of pages are gotten */
         List<WebElement> pages = driver.findElements(By.cssSelector("span.s-pagination-item.s-pagination-disabled"));
