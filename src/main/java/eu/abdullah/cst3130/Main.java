@@ -22,7 +22,6 @@ import java.util.List;
  * This is the main file for the java application
  *
  * @author Abdullah Ola Mudathir
- *
  */
 public class Main {
 
@@ -30,16 +29,24 @@ public class Main {
     public static void main(String[] args) {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(false);
+        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36");
         //        options.set
         System.setProperty("webdriver.chrome.driver", "C:\\Programs\\ChromeDriver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+
 
         ArgosScraper argosScraper = new ArgosScraper(options);
         OverClockers overClockers = new OverClockers(options);
         AmazonScraper amazonScraper = new AmazonScraper(options);
-//        argosScraper.start();
-        overClockers.start();
+        argosScraper.start();
+//        overClockers.start();
 //        amazonScraper.start();
+//
 
+//        try {
+//            hibernateMapping.shutDown();
+//        } catch (Exception ex) {
+//            System.out.println(ex);
+//        }
 //        HibernateMapping hibernateMapping =  new HibernateMapping();
 //        hibernateMapping.init();
 //

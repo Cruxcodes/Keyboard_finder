@@ -24,8 +24,5 @@
         <!-- Mapping files -->
         <mapping class="eu.abdullah.cst3130.models.KeyboardAnnotation" />
         <mapping class="eu.abdullah.cst3130.models.KeyboardDetailsAnnotation" />
-<!--        <mapping class="com.webscrapper.gamingPc"/>-->
-<!--        <mapping class="com.webscrapper.gamingPcDetails"/>-->
-
     </session-factory>
 </hibernate-configuration>

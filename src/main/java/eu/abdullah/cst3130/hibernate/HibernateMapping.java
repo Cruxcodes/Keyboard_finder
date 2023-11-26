@@ -75,13 +75,6 @@ public class HibernateMapping {
     /**Adding keyboard details */
 
     public void addKeyboardDetails(KeyboardDetailsAnnotation detailsAnnotation){
-//    public void addKeyboard(){
-//        Session session = sessionFactory.getCurrentSession();
-//        session.beginTransaction();
-//        session.save(detailsAnnotation);
-//        session.getTransaction().commit();
-//        session.close();
-
         try {
             Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();

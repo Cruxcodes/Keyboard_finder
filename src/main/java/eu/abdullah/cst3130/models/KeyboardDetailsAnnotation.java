@@ -3,7 +3,9 @@ package eu.abdullah.cst3130.models;
 import jakarta.persistence.*;
 
 
-/**Annotation for the keyboard_details table*/
+/**
+ * Annotation for the keyboard_details table
+ */
 @Entity
 @Table(name = "keyboard_details")
 public class KeyboardDetailsAnnotation {
@@ -24,7 +26,7 @@ public class KeyboardDetailsAnnotation {
     @Column(name = "image")
     private String image;
 
-//    @ElementCollection
+    //    @ElementCollection
 //    @CollectionTable(name = "keyboard_images", joinColumns = @JoinColumn(name = "keyboard_detail_id"))
 //    @Column(name = "image")
 //    private List<String> images;
@@ -37,8 +39,12 @@ public class KeyboardDetailsAnnotation {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "short_description", columnDefinition = "TEXT")
+    private String shortDescription;
+
     @Column(name = "keyboard_id")
     private int keyboardId;
+
 
     /**
      * Empty constructor
@@ -117,5 +123,13 @@ public class KeyboardDetailsAnnotation {
 
     public void setKeyboardId(int keyboardId) {
         this.keyboardId = keyboardId;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 }

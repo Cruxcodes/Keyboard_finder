@@ -1,5 +1,8 @@
 package eu.abdullah.cst3130.scrapers;
 
+import eu.abdullah.cst3130.hibernate.HibernateMapping;
+import eu.abdullah.cst3130.models.KeyboardAnnotation;
+import eu.abdullah.cst3130.models.KeyboardDetailsAnnotation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,104 +11,141 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.List;
 
-public class AmazonScraper extends Thread{
-//    https://www.amazon.co.uk/s?bbn=340831031&rh=n%3A13978270031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&rd=1&ref=Oct_d_odnav_428654031
-ChromeOptions chromeOptions;
+public class AmazonScraper extends Thread {
+    //    https://www.amazon.co.uk/s?bbn=340831031&rh=n%3A13978270031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&rd=1&ref=Oct_d_odnav_428654031
+    ChromeOptions chromeOptions;
+
 
     public AmazonScraper(ChromeOptions chromeOptions) {
         this.chromeOptions = chromeOptions;
     }
 
-        String[] brandNames = {"Logitech","Razer","Steelseries"};
 
+    /**
+     * This function is run on therad start
+     */
     @Override
     public void run() {
+        HibernateMapping hibernateMapping = new HibernateMapping();
+        hibernateMapping.init();
         WebDriver driver = new ChromeDriver(this.chromeOptions);
-        driver.get("https://www.amazon.co.uk/s?bbn=340831031&rh=n%3A13978270031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&rd=1&ref=Oct_d_odnav_428654031");
+//        driver.get("https://www.amazon.co.uk/s?bbn=340831031&rh=n%3A13978270031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&rd=1&ref=Oct_d_odnav_428654031");
+        driver.get("https://www.amazon.co.uk/s?i=computers&bbn=340831031&rh=n%3A13978270031%2Cp_89%3ACorsair%7CLogitech+G%7CRazer%7CSteelSeries&dc&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&qid=1700920911&rd=1&rnid=1632651031&ref=sr_nr_p_89_4&ds=v1%3AFUYc8%2BNFlxitTZuoCq3WtF%2B7LPrRIpkUZH6fD2t192U");
 
 //        List<WebElement> elementList = driver.findElements(By.cssSelector("[data-qa='ck-product-box']"));
-        List<WebElement> productElement = driver.findElements( By.cssSelector("span.a-size-base-plus"));
-//        List<WebElement> products = driver.findElements(By.cssSelector("h6.h5"));
-        System.out.println(productElement);
-//        for (int i = 0; i < productElement.size(); i++) {
-//            System.out.println(productElement.get(i).getAttribute("data-qa"));
-//            System.out.println(productElement.get(i).getAttribute(""));
-////            System.out.println(products.get(i).getText());
-//        }
-
-//        System.out.println(products);
-        for (int i = 0; i < productElement.size(); i++) {
-            System.out.println(productElement.get(i).getText());
-        }
-//        for (WebElement element : productElement) {
-////            System.out.println(element);
-//            // Find the specific div element within the product element by its CSS selector
-//            WebElement divElement = element.findElement(By.cssSelector("h6.h5"));
-//
-//            // Get the text content of the div element
-//            String divText = divElement.getText();
-//
-//            System.out.println("Value of the div element: " + divText);
-//        }
-//        String dataQa = productElement.getAttribute("data-qa");
-//        System.out.println("data-qa: " + dataQa);
-//        WebElement productNameElement = productElement.findElement(By.cssSelector("[data-qa='ck-product-box--title-link']"));
-//        String productName = productNameElement.getText();
-//        System.out.println("Product Name: " + productName);
-//
-//        // Extract product price
-//        WebElement priceElement = productElement.findElement(By.cssSelector("[data-qa='price-current']"));
-//        String price = priceElement.getText();
-//        System.out.println("Price: " + price);
-//
-//        // Extract availability status
-//        WebElement availabilityElement = productElement.findElement(By.cssSelector("[data-qa='availability_status_available']"));
-//        String availabilityStatus = availabilityElement.getText();
-//        System.out.println("Availability Status: " + availabilityStatus);
-//
-//        // Extract product description
-//        WebElement descriptionElement = productElement.findElement(By.className("ck-product-box-short-description"));
-//        String description = descriptionElement.getText();
-//        System.out.println("Description: " + description);
-
-//        List<Object> productName = new ArrayList<>();
-////            System.out.println(elementList.size());
-//        for (int i = 0; i < elementList.size(); i++) {
-////                console.log(elementList[i]);
-////                System.out.println(elementList.get(i));
-//            System.out.println(elementList.get(i).getText()
-////                    elementList.get(i).findElements(By.className("co-product__anchor"))
-//            );
-////            try {
-////                Thread.sleep(3000);
-////            } catch (Exception ex) {
-////                ex.printStackTrace();
-////            }
-//        }
         try {
             Thread.sleep(3000);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-//        WebElement element = driver.findElement(By.cssSelector("[data-test='product-group-card-0']"));
-//        String dataTestValue = element.getAttribute("data-test");
-//        System.out.println("data-test value: " + dataTestValue);
+
+        //This is the button for accepting all cookies.
+
+        WebElement acceptCookies = driver.findElement(By.id("sp-cc-accept"));
+        acceptCookies.click();
+        try {
+            Thread.sleep(4000);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+//        List<WebElement> productList = driver.findElements(By.cssSelector("div.a-section.a-spacing-base"));
+
+        /**The number of pages are gotten */
+        List<WebElement> pages = driver.findElements(By.cssSelector("span.s-pagination-item.s-pagination-disabled"));
+        Integer numberOfPages = Integer.parseInt(pages.get(pages.size() - 1).getText());
 
 
-//            System.out.println(driver.getPageSource());
+        for (int i = 0; i <= numberOfPages; i++) {
+            driver.get("https://www.amazon.co.uk/s?i=computers&bbn=340831031&rh=n%3A13978270031%2Cp_89%3ACorsair%7CLogitech+G%7CRazer%7CSteelSeries&dc&page=" + i + "&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&qid=1701000716&rd=1&rnid=1632651031&ref=sr_pg_2");
+
+//        List<WebElement> elementList = driver.findElements(By.cssSelector("[data-qa='ck-product-box']"));
+            try {
+                Thread.sleep(3000);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            List<WebElement> productList = driver.findElements(By.cssSelector("div.a-section.a-spacing-base"));
+
+            for (WebElement product : productList) {
+                KeyboardAnnotation keyboardAnnotation = new KeyboardAnnotation();
+                KeyboardDetailsAnnotation detailsAnnotation = new KeyboardDetailsAnnotation();
+//            This is for the product image
+//product.findElement(By.cssSelector("img.s-image")).getAttribute("src")
+                //This is for the url link
+//            System.out.println(product.findElement(By.cssSelector("a.a-link-normal.s-underline-text")).getAttribute("href"));
+                WebDriver detailsDriver = new ChromeDriver(this.chromeOptions);
+                detailsDriver.get(product.findElement(By.cssSelector("a.a-link-normal.s-underline-text")).getAttribute("href"));
+                try {
+                    Thread.sleep(4000);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                try {
+                    WebElement detailAcceptCookies = detailsDriver.findElement(By.id("sp-cc-accept"));
+                    detailAcceptCookies.click();
+                    try {
+                        Thread.sleep(4000);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    String[] productTitle = detailsDriver.findElement(By.cssSelector("span#productTitle")).getText().split(" ");
+//                This is the brand name
+                    String name = productTitle[0] + " " + productTitle[1] + " " + productTitle[2] + " " + productTitle[3];
+                    String model = productTitle[1] + " " + productTitle[2] + " " + productTitle[3];
 
 
-//        for (int i = 0; i < 5; i++) {
-//            System.out.println(i);
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+                    keyboardAnnotation.setImage(product.findElement(By.cssSelector("img.s-image")).getAttribute("src"));
+                    keyboardAnnotation.setName(name);
+                    keyboardAnnotation.setModel(model);
+
+                    detailsAnnotation.setWebsite_url(product.findElement(By.cssSelector("a.a-link-normal.s-underline-text")).getAttribute("href"));
+                    detailsAnnotation.setShortDescription(detailsDriver.findElement(By.cssSelector("span#productTitle")).getText());
+                    detailsAnnotation.setName(name);
+                    detailsAnnotation.setBrand(productTitle[0]);
+                    detailsAnnotation.setModel(model);
+                    detailsAnnotation.setDescription(detailsDriver.findElement(By.cssSelector("ul.a-unordered-list.a-vertical.a-spacing-mini")).getText());
+//                System.out.println();
+
+//                This is the image inside the list
+                    detailsAnnotation.setImage(detailsDriver.findElement(By.cssSelector("img#landingImage")).getAttribute("src"));
+
+//                This is for the price
+                    String priceString = product.findElement(By.cssSelector("span.a-price-whole")).getText() + "." + product.findElement(By.cssSelector("span.a-price-fraction")).getText();
+                    float price = Float.parseFloat(priceString);
+
+                    keyboardAnnotation.setPrice(price);
+                    detailsAnnotation.setPrice(price);
+                    detailsAnnotation.setKeyboardId(keyboardAnnotation.getId());
 
 
+                } catch (Exception e) {
+                    // Handle case when element doesn't exist
+                    System.err.println(e);
+                }
+
+                detailsDriver.quit();
+
+
+                try {
+                    Thread.sleep(4000);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                hibernateMapping.addKeyboard(keyboardAnnotation);
+                detailsAnnotation.setKeyboardId(keyboardAnnotation.getId());
+                hibernateMapping.addKeyboardDetails(detailsAnnotation);
+            }
+
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        hibernateMapping.shutDown();
         driver.quit();
     }
 }
