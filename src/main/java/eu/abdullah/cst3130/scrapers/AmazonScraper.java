@@ -12,9 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.List;
 
 public class AmazonScraper extends Thread {
-    //    https://www.amazon.co.uk/s?bbn=340831031&rh=n%3A13978270031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&rd=1&ref=Oct_d_odnav_428654031
     ChromeOptions chromeOptions;
-
 
     public AmazonScraper(ChromeOptions chromeOptions) {
         this.chromeOptions = chromeOptions;
@@ -56,7 +54,6 @@ public class AmazonScraper extends Thread {
         for (int i = 0; i <= numberOfPages; i++) {
             driver.get("https://www.amazon.co.uk/s?i=computers&bbn=340831031&rh=n%3A13978270031%2Cp_89%3ACorsair%7CLogitech+G%7CRazer%7CSteelSeries&dc&page=" + i + "&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.3642feb9-f459-485e-b5f9-8e67b609eacd&pd_rd_r=21371497-293a-4ee5-9948-f58f32e7a7d2&pd_rd_w=iSaBC&pd_rd_wg=3vPcg&pf_rd_p=3642feb9-f459-485e-b5f9-8e67b609eacd&pf_rd_r=H2MDJXQHT6M4F19CK301&qid=1701000716&rd=1&rnid=1632651031&ref=sr_pg_2");
 
-//        List<WebElement> elementList = driver.findElements(By.cssSelector("[data-qa='ck-product-box']"));
             try {
                 Thread.sleep(3000);
             } catch (Exception ex) {

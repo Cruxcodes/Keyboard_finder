@@ -98,9 +98,19 @@ public class ArgosScraper extends Thread {
 //                element.findElement(By.cssSelector("[data-test='component-product-card-link']")).getAttribute("href")
 //                This is the name of the products
                 String[] nameOfProduct =element.findElement(By.cssSelector("[data-test='component-product-card-title']")).getText().split(" ");
+//              This is the brand name
+                // nameOfProduct[0]
+//              This is the model name
+//              nameOfProduct[1] + nameOfProduct[2]
+
+
 
                 System.out.println(element.findElement(By.cssSelector("[data-test='component-product-card-title']")).getText());
-                System.out.println(element.findElement(By.cssSelector("[data-test='component-image']")).getAttribute("src"));
+
+//                This is the product image
+//                System.out.println(element.findElement(By.cssSelector("[data-test='component-image']")).getAttribute("src"));
+
+
             }
         } catch (Exception ex) {
 
