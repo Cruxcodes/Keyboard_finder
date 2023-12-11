@@ -24,5 +24,6 @@
         <!-- Mapping files -->
         <mapping class="eu.abdullah.cst3130.models.KeyboardAnnotation" />
         <mapping class="eu.abdullah.cst3130.models.KeyboardDetailsAnnotation" />
+        <mapping class="eu.abdullah.cst3130.models.ComparisonAnnotation" />
     </session-factory>
 </hibernate-configuration>

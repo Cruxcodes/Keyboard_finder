@@ -1,8 +1,10 @@
 package eu.abdullah.cst3130.scrapers;
 
 import eu.abdullah.cst3130.hibernate.HibernateMapping;
+import eu.abdullah.cst3130.models.ComparisonAnnotation;
 import eu.abdullah.cst3130.models.KeyboardAnnotation;
 import eu.abdullah.cst3130.models.KeyboardDetailsAnnotation;
+import eu.abdullah.cst3130.utilities.KeyboardModelNormalizer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,19 +61,24 @@ public class OverClockers extends Thread {
                     List<String> price = new ArrayList<>(List.of(productElements.get(j).findElement(By.cssSelector("span.price__amount")).getText().split("")));
                     price.remove(0);
                     float keyPrice = Float.parseFloat(String.join("", price));
+                    String modelValue = extractedNameAndModel[1] + " " + extractedNameAndModel[2] + " " + extractedNameAndModel[3];
+                    KeyboardModelNormalizer keyboardModelNormalizer = new KeyboardModelNormalizer();
+                    String model = keyboardModelNormalizer.normalizeModelName(modelValue);
+                    String name = extractedNameAndModel[0] + " " + model;
 
                     /**Setting all the values of the keyboard and keyboard details*/
                     keyboardAnnotation.setImage(productElements.get(j).findElement(By.cssSelector("[data-qa ='component ck-img']")).getAttribute("src"));
-                    keyboardAnnotation.setName(extractedNameAndModel[0] + " " + extractedNameAndModel[1] + " " + extractedNameAndModel[2]);
-                    keyboardAnnotation.setModel(extractedNameAndModel[1] + " " + extractedNameAndModel[2] + " " + extractedNameAndModel[3]);
-                    keyboardAnnotation.setPrice(keyPrice);
+                    keyboardAnnotation.setName(name);
+                    keyboardAnnotation.setModel(model);
 
-                    detailsAnnotation.setName(extractedNameAndModel[0] + " " + extractedNameAndModel[1] + " " + extractedNameAndModel[2]);
+                    detailsAnnotation.setName(name);
                     detailsAnnotation.setBrand(extractedNameAndModel[0]);
-                    detailsAnnotation.setModel(extractedNameAndModel[1] + " " + extractedNameAndModel[2] + " " + extractedNameAndModel[3]);
-                    detailsAnnotation.setWebsite_url(productElements.get(j).findElement(By.cssSelector("a.js-gtm-product-link")).getAttribute("href"));
+                    keyboardAnnotation.setBrand(extractedNameAndModel[0]);
+                    detailsAnnotation.setModel(model);
+//                    detailsAnnotation.setWebsite_url(productElements.get(j).findElement(By.cssSelector("a.js-gtm-product-link")).getAttribute("href"));
                     detailsAnnotation.setShortDescription(productElements.get(j).findElement(By.cssSelector("h6.h5")).getText());
-                    detailsAnnotation.setPrice(keyPrice);
+//                    detailsAnnotation.setPrice(keyPrice);
+
                     /**The single scraping for the details of the keyboard*/
                     WebDriver detailsDriver = new ChromeDriver(this.chromeOptions);
                     detailsDriver.get(productElements.get(j).findElement(By.cssSelector("a.js-gtm-product-link")).getAttribute("href"));
@@ -102,10 +109,18 @@ public class OverClockers extends Thread {
                     }
                     /** End of the driver*/
 
-                    hibernateMapping.addKeyboard(keyboardAnnotation);
-                    detailsAnnotation.setKeyboardId(keyboardAnnotation.getId());
 
-                    hibernateMapping.addKeyboardDetails(detailsAnnotation);
+                    int exists = hibernateMapping.isKeyboardExisting(keyboardAnnotation);
+                    if (exists == -10) {
+                        // Keyboard doesn't exist, add keyboard and details to the database
+                        hibernateMapping.addKeyboard(keyboardAnnotation);
+                        detailsAnnotation.setKeyboardId(keyboardAnnotation.getId());
+                        hibernateMapping.addKeyboardDetails(detailsAnnotation);
+                        hibernateMapping.addComparisonIfNotExisting(detailsAnnotation.getId(), keyPrice,productElements.get(j).findElement(By.cssSelector("a.js-gtm-product-link")).getAttribute("href"));
+
+                    } else {
+                        hibernateMapping.addComparisonIfNotExisting(exists, keyPrice, productElements.get(j).findElement(By.cssSelector("a.js-gtm-product-link")).getAttribute("href"));
+                    }
                 }
             }
         }

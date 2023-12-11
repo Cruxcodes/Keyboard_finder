@@ -2,23 +2,19 @@ package eu.abdullah.cst3130.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 
 /**
  * Annotation for the keyboard_details table
  */
 @Entity
 @Table(name = "keyboard_details")
-public class KeyboardDetailsAnnotation {
+public class KeyboardDetailsAnnotation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Column(name = "link")
-    private String website_url;
-
-    @Column(name = "price")
-    private float price;
 
     @Column(name = "name")
     private String name;
@@ -45,12 +41,23 @@ public class KeyboardDetailsAnnotation {
     @Column(name = "keyboard_id")
     private int keyboardId;
 
+    @Column(name = "color")
+    private String color;
+
 
     /**
      * Empty constructor
      */
     public KeyboardDetailsAnnotation() {
 
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public int getId() {
@@ -61,21 +68,6 @@ public class KeyboardDetailsAnnotation {
         this.id = id;
     }
 
-    public String getWebsite_url() {
-        return website_url;
-    }
-
-    public void setWebsite_url(String website_url) {
-        this.website_url = website_url;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
 
     public String getName() {
         return name;

@@ -5,6 +5,7 @@ package eu.abdullah.cst3130;
 //import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.chrome.ChromeOptions;
 
+//import eu.abdullah.cst3130.config.AppConfig;
 import eu.abdullah.cst3130.hibernate.HibernateMapping;
 import eu.abdullah.cst3130.scrapers.AmazonScraper;
 import eu.abdullah.cst3130.scrapers.ArgosScraper;
@@ -14,6 +15,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,7 @@ public class Main {
         AmazonScraper amazonScraper = new AmazonScraper(options);
         argosScraper.start();
 //        overClockers.start();
-//        amazonScraper.start();
+        amazonScraper.start();
 //
 
 //        try {
@@ -54,5 +57,12 @@ public class Main {
 ////        hibernateMapping.addKeyboard();
 ////        hibernateMapping.addKeyboard();
 //        hibernateMapping.shutDown();
+
+//        ApplicationContext context = new AnnotationConfigApplicationContext(
+//                AppConfig.class
+//        );
+//
+//        ThreadStarter mainThread = (ThreadStarter) context.getBean("thread");
+//        mainThread.scrapeAll();
     }
 }
