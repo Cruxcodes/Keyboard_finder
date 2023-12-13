@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 /**
- * Represents the Keyboard. Java annotation is used for mappings
+ * Represents the Keyboard model
  */
 
 @Entity

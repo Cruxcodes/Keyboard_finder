@@ -15,25 +15,8 @@ public class KeyboardDetailsAnnotation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Column(name = "name")
-    private String name;
-
     @Column(name = "image")
     private String image;
-
-    //    @ElementCollection
-//    @CollectionTable(name = "keyboard_images", joinColumns = @JoinColumn(name = "keyboard_detail_id"))
-//    @Column(name = "image")
-//    private List<String> images;
-    @Column(name = "model")
-    private String model;
-
-    @Column(name = "brand")
-    private String brand;
-
-    @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
 
     @Column(name = "short_description", columnDefinition = "TEXT")
     private String shortDescription;
@@ -68,45 +51,12 @@ public class KeyboardDetailsAnnotation implements Serializable {
         this.id = id;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getKeyboardId() {

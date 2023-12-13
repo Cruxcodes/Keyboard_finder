@@ -14,7 +14,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 /**
- * This is the hibernate mapping instance
+ * HibernateMapping class manages Hibernate operations needed for modifying the database
  */
 public class HibernateMapping {
     private SessionFactory sessionFactory;
@@ -25,8 +25,9 @@ public class HibernateMapping {
     public HibernateMapping() {
     }
 
+
     /**
-     * Sets up the session factory and calls this method first*
+     * Runs and sets up the session factory and initializes Hibernate
      */
     public void init() {
         try {
@@ -43,14 +44,10 @@ public class HibernateMapping {
                 //Create the session factory - this is the goal of the init method.
                 sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             } catch (Exception e) {
-                    /* The registry would be destroyed by the SessionFactory,
-                        but we had trouble building the SessionFactory, so destroy it manually */
                 System.err.println("Session Factory build failed.");
                 e.printStackTrace();
                 StandardServiceRegistryBuilder.destroy(registry);
             }
-
-            //Ouput result
             System.out.println("Session factory built.");
 
         } catch (Throwable ex) {
@@ -75,31 +72,15 @@ public class HibernateMapping {
         sessionFactory.close();
     }
 
-    public String extractSiteNameFromUrl(String url) {
-        String siteName = "";
-
-        if (url.contains("overclockers.co.uk")) {
-            siteName = "Overclockers";
-        } else if (url.contains("amazon.co.uk")) {
-            siteName = "Amazon";
-        }
-        // Add more conditions based on your URL patterns for other sites
-
-        return siteName;
-    }
-
 
     /**
      * Adding new keyboard brand to the database
      */
     public void addKeyboard(KeyboardAnnotation keyboardAnnotation) {
-//    public void addKeyboard(){
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.getTransaction();
-
         if (!transaction.isActive()) {
             session.beginTransaction();
-            // Your transactional operations here// Commit the transaction after successful operations
         }
         session.save(keyboardAnnotation);
         session.getTransaction().commit();
@@ -107,79 +88,70 @@ public class HibernateMapping {
     }
 
     /**
-     * Adding keyboard details
+     * Adding keyboard details to the session and database
      */
-
     public void addKeyboardDetails(KeyboardDetailsAnnotation detailsAnnotation) {
         try {
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.getTransaction();
-
             if (!transaction.isActive()) {
                 session.beginTransaction();
-                // Your transactional operations here// Commit the transaction after successful operations
             }
-
             session.save(detailsAnnotation);
             session.getTransaction().commit();
             session.close();
-
         } catch (Exception e) {
             e.printStackTrace(); // Log or handle the exception appropriately
         }
     }
 
 
-    /**This checks if the keyboard model is existing */
+    /**
+     * This checks if the keyboard model is existing by comparing the keyboardAnnotation id to any instance in the database
+     *
+     * @param keyboardAnnotation The keyboard entity
+     * @return if the model exists return the model id else -10
+     */
+
     public int isKeyboardExisting(KeyboardAnnotation keyboardAnnotation) {
         int exists = -10;
-
         try {
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.getTransaction();
-
             if (!transaction.isActive()) {
                 session.beginTransaction();
-                // Your transactional operations here// Commit the transaction after successful operations
             }
-
-            // Check if the keyboard exists
             Query query = session.createQuery("FROM KeyboardAnnotation WHERE model = :modelName");
             query.setParameter("modelName", keyboardAnnotation.getModel());
             List<KeyboardAnnotation> keyboardList = query.list();
-
             if (!keyboardList.isEmpty()) {
                 KeyboardAnnotation existingKeyboard = keyboardList.get(0);
                 exists = existingKeyboard.getId();
-                // Check if the keyboard details exist for the existingKeyboard
             } else {
                 return exists;
-                // Keyboard does not exist
-                // Handle the scenario accordingly
             }
-
-
-//            session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(); // Log or handle the exception appropriately
         }
-
         return exists;
     }
 
 
-
-    public int isKeyboardDetailExisiting(int existingKeyboard,String color) {
+    /**
+     * Checks if a keyboard model exists in the database for a given existingKeyboard and color.
+     *
+     * @param existingKeyboard The existing keyboard ID.
+     * @param color            The color of the keyboard detail.
+     * @return The ID of the existing keyboard detail if found, otherwise -10.
+     */
+    public int isKeyboardDetailExisiting(int existingKeyboard, String color) {
         int exists = -10;
         try {
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.getTransaction();
-
             if (!transaction.isActive()) {
                 session.beginTransaction();
-                // Your transactional operations here// Commit the transaction after successful operations
             }
-
             Query detailsQuery = session.createQuery("FROM KeyboardDetailsAnnotation WHERE keyboardId = :id and color = :color");
             detailsQuery.setParameter("id", existingKeyboard);
             detailsQuery.setParameter("color", color);
@@ -188,9 +160,6 @@ public class HibernateMapping {
             if (!detailsList.isEmpty()) {
                 KeyboardDetailsAnnotation detailsAnnotation = detailsList.get(0);
                 exists = detailsAnnotation.getId();
-            } else {
-                // Keyboard exists but details do not exist
-                // Handle the scenario accordingly
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -199,12 +168,16 @@ public class HibernateMapping {
         return exists;
     }
 
+
     /**
-     * This checks if the keyboard in the details has a comparison
+     * Checks if a comparison entry exists for a keyboard ID and link.
+     *
+     * @param keyboardId The ID of the keyboard.
+     * @param link       The link associated with the comparison.
+     * @return True if a comparison entry exists, otherwise false.
      */
     public boolean isExistingInComparison(int keyboardId, String link) {
         try (Session session = sessionFactory.openSession()) {
-            // Check if there is any entry in the ComparisonAnnotation table with the given keyboard ID and link
             Query<Long> query = session.createQuery("SELECT COUNT(*) FROM ComparisonAnnotation WHERE keyboardId = :keyboardId AND link = :link", Long.class);
             query.setParameter("keyboardId", keyboardId);
             query.setParameter("link", link);
@@ -217,6 +190,14 @@ public class HibernateMapping {
         }
     }
 
+
+    /**
+     * Adds a new comparison entry if it does not already exist.
+     *
+     * @param keyboardAnnotation The ID of the keyboard.
+     * @param price              The price for comparison.
+     * @param link               The link associated with the comparison.
+     */
     public void addComparisonIfNotExisting(int keyboardAnnotation, float price, String link) {
         boolean isExisting = isExistingInComparison(keyboardAnnotation, link); // Check if comparison exists for the keyboard and link
 
@@ -229,6 +210,14 @@ public class HibernateMapping {
         }
     }
 
+
+    /**
+     * Adds a new comparison entry to the database
+     *
+     * @param keyboardId The ID of the keyboard.
+     * @param price      The price for comparison.
+     * @param link       The link associated with the comparison.
+     */
     private void addComparison(int keyboardId, float price, String link) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();

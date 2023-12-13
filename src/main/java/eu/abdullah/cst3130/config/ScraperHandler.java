@@ -2,37 +2,55 @@ package eu.abdullah.cst3130.config;
 
 import java.util.List;
 
+/**
+ * Handles a list of scraper threads and manages their execution.
+ */
+
 public class ScraperHandler {
 
     private static List<Thread> scraperList;
 
-    //Empty constructor
-    ScraperHandler() {
+    /**
+     * Empty constructor for ScraperHandler.
+     */
+    public ScraperHandler() {
     }
 
-    //Getter
+    /**
+     * Gets the list of scraper threads.
+     * @return The list of scraper threads.
+     */
     public static List<Thread> getScraperList() {
         return scraperList;
     }
 
-    //Setter
+    /**
+     * Sets the list of scraper threads.
+     *
+     * @param sList The list of scraper threads to be set.
+     */
     public static void setScraperList(List<Thread> sList) {
         scraperList = sList;
     }
 
-    //Start TVScrapers
+    /**
+     * Starts all the scraper threads.
+     * Uses start() to initiate a new thread.
+     */
     public void startThreads() {
-        for (Thread TVScraper : scraperList) {
-            TVScraper.start();
+        for (Thread scraper : scraperList) {
+            scraper.start();
         }
     }
 
-    //Join TVScrapers
+    /**
+     * Joins all the scraper threads.
+     * Uses join() to wait for the threads to finish.
+     */
     public void joinThreads() {
-        for (Thread TVScraper : scraperList) {
-
+        for (Thread scraper : scraperList) {
             try {
-                TVScraper.join();
+                scraper.join();
             } catch (InterruptedException ex) {
                 System.err.println(ex.getMessage());
             }

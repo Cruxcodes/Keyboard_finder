@@ -2,22 +2,14 @@ package eu.abdullah.cst3130.utilities;
 
 import java.util.Arrays;
 
+
+/**
+ * The keyboard normalizer class
+ */
 public class KeyboardModelNormalizer {
-
-//    public  String normalizeModelName(String modelName) {
-//        if (modelName != null && !modelName.isEmpty()) {
-//            String[] words = modelName.split("\\s+");
-//            if (words.length > 0) {
-//                String lastWord = words[words.length - 1];
-//                if (lastWord.endsWith("(") || lastWord.endsWith(")")) {
-//                    words[words.length - 1] = lastWord.substring(0, lastWord.length() - 1);
-//                    modelName = String.join(" ", words);
-//                }
-//            }
-//        }
-//        return modelName;
-//    }
-
+    /**
+     * Normalizes the provided model name by removing any trailing non-alphanumeric characters.
+     */
     public String normalizeModelName(String modelName) {
         if (modelName != null && !modelName.isEmpty()) {
             String[] words = modelName.split("\\s+");

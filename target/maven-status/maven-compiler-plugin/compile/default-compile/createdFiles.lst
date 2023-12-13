@@ -1,6 +1,15 @@
+eu\abdullah\cst3130\models\ComparisonAnnotation.class
+eu\abdullah\cst3130\config\ScraperHandler.class
 eu\abdullah\cst3130\scrapers\OverClockers.class
+eu\abdullah\cst3130\scrapers\NewGGScraper.class
+eu\abdullah\cst3130\ThreadHandler.class
+eu\abdullah\cst3130\config\AppConfig.class
+eu\abdullah\cst3130\utilities\KeyboardUtil.class
 eu\abdullah\cst3130\scrapers\AmazonScraper.class
 eu\abdullah\cst3130\hibernate\HibernateMapping.class
+eu\abdullah\cst3130\scrapers\EbayScrapper.class
 eu\abdullah\cst3130\scrapers\ArgosScraper.class
 eu\abdullah\cst3130\Main.class
 eu\abdullah\cst3130\models\KeyboardAnnotation.class
+eu\abdullah\cst3130\utilities\KeyboardModelNormalizer.class
+eu\abdullah\cst3130\models\KeyboardDetailsAnnotation.class

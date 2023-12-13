@@ -1,7 +1,15 @@
-C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\hibernate\HibernateMapping.java
 C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\scrapers\ArgosScraper.java
 C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\scrapers\OverClockers.java
 C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\Main.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\utilities\KeyboardUtil.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\ThreadHandler.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\scrapers\EbayScrapper.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\hibernate\HibernateMapping.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\config\AppConfig.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\models\KeyboardDetailsAnnotation.java
 C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\models\KeyboardAnnotation.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\scrapers\NewGGScraper.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\utilities\KeyboardModelNormalizer.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\models\ComparisonAnnotation.java
 C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\scrapers\AmazonScraper.java
-C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\Keyboard.java
+C:\Users\Crusader\Documents\JAVA_PROJECT\price-comparison\src\main\java\eu\abdullah\cst3130\config\ScraperHandler.java
