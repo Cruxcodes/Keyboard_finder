@@ -22,7 +22,7 @@ public class KeyboardUtil {
      * @return The extracted color
      */
     public String getColor(String description) {
-        String[] colors = {"Black", "White", "Red", "Pink", "Graphite", "Grey", "Space GREY", "Blue", "Green", "Yellow", "Orange", "Purple", "Silver", "Skyline","Brown"}; // Some Colors to scrape against
+        String[] colors = {"Black", "White", "Red", "Pink", "Graphite", "Grey", "Space GREY", "Blue", "Green", "Yellow", "Orange", "Purple", "Silver", "Skyline", "Brown"}; // Some Colors to scrape against
 
         for (String color : colors) {
             if (description.toLowerCase().contains(color.toLowerCase())) {
@@ -52,6 +52,12 @@ public class KeyboardUtil {
         return false;     // Default color if no match is found
     }
 
+    /**
+     * This method is used to remove the first letter instance of a string e.g(£123.43)
+     *
+     * @param price The string to be formatted
+     * @return The price as a float without £
+     */
 
     public float formatPrice(String price) {
         List<String> priceValues = List.of(price.split(""));

@@ -39,4 +39,25 @@ class KeyboardUtilTest {
         boolean containsEnding = keyboardUtil.getEnding(beginning, model);
         assertFalse(containsEnding);
     }
+    
+    @Test
+    public void testFormatPrice_validInput() {
+        KeyboardUtil keyboardUtilTest = new KeyboardUtil();
+        String price = "$123.45";
+        float expectedValue = 123.45f;
+
+        float result = keyboardUtilTest.formatPrice(price);
+
+        assertEquals(expectedValue, result, 0.001f);
+    }
+
+    @Test
+    public void testFormatPrice_invalidInput() {
+        KeyboardUtil keyboardUtilTest = new KeyboardUtil(); // Replace 'KeyboardUtilTest' with your actual class name
+        String invalidPrice = "$abc"; // Invalid input price
+
+        assertThrows(NumberFormatException.class, () -> {
+            keyboardUtilTest.formatPrice(invalidPrice);
+        });
+    }
 }

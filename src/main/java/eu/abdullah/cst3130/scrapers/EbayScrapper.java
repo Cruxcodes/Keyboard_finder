@@ -85,7 +85,6 @@ public class EbayScrapper extends Thread {
                     } else {
                         modelValue = productTitle[1] + " " + productTitle[2] + " " + productTitle[3];
                     }
-                    /** This is where the normalization occurs */
                     KeyboardModelNormalizer keyboardModelNormalizer = new KeyboardModelNormalizer();
                     String model = keyboardModelNormalizer.normalizeModelName(modelValue);
                     String name = productTitle[0] + " " + model;
@@ -103,9 +102,6 @@ public class EbayScrapper extends Thread {
 
                     WebElement priceString = detailsDriver.findElement(By.cssSelector("div.x-price-primary"));
                     float price = keyboardColor.formatPrice(priceString.findElement(By.cssSelector("span.ux-textspans")).getText());
-//                    float price = Float.parseFloat(priceString.substring(1)); // Assuming £ as the currency symbol
-
-
                     detailsDriver.quit();
                     try {
                         Thread.sleep(3000);

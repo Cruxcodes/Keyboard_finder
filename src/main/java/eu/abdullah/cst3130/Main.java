@@ -7,10 +7,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
  * This is the main file for the java application
+ * Uses Spring's ApplicationContext to configure the application and initiate the scraper threads.
  *
  * @author Abdullah Ola Mudathir
  */
 public class Main {
+
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "C:\\Programs\\ChromeDriver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
         ApplicationContext context = new AnnotationConfigApplicationContext(

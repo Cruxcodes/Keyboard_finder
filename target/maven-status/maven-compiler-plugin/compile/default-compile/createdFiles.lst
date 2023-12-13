@@ -2,7 +2,6 @@ eu\abdullah\cst3130\models\ComparisonAnnotation.class
 eu\abdullah\cst3130\config\ScraperHandler.class
 eu\abdullah\cst3130\scrapers\OverClockers.class
 eu\abdullah\cst3130\scrapers\NewGGScraper.class
-eu\abdullah\cst3130\ThreadHandler.class
 eu\abdullah\cst3130\config\AppConfig.class
 eu\abdullah\cst3130\utilities\KeyboardUtil.class
 eu\abdullah\cst3130\scrapers\AmazonScraper.class

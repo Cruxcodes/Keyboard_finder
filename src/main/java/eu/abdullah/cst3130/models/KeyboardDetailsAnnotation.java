@@ -15,7 +15,9 @@ public class KeyboardDetailsAnnotation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "image")
+
+    //This gets the image in a bigger size
+    @Column(name = "description_image")
     private String image;
 
     @Column(name = "short_description", columnDefinition = "TEXT")

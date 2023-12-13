@@ -1,6 +1,4 @@
 package eu.abdullah.cst3130.config;
-
-import eu.abdullah.cst3130.config.ScraperHandler;
 import eu.abdullah.cst3130.hibernate.HibernateMapping;
 import eu.abdullah.cst3130.scrapers.*;
 import org.hibernate.SessionFactory;
@@ -28,11 +26,11 @@ public class AppConfig {
         ScraperHandler scraperHandler = new ScraperHandler();
 
         List<Thread> scraperList = new ArrayList<>();
-//        scraperList.add(overClockers());
-//        scraperList.add(amazonScraper());
-//        scraperList.add(argosScraper());
+        scraperList.add(overClockers());
+        scraperList.add(amazonScraper());
+        scraperList.add(argosScraper());
         scraperList.add(ebayScrapper());
-//        scraperList.add(newGGScraper());
+        scraperList.add(newGGScraper());
         ScraperHandler.setScraperList(scraperList);
 
         // Return Scraper Handler object
@@ -40,9 +38,9 @@ public class AppConfig {
     }
 
     /**
-     * Bean to initialize OverClockers scraper.
+     * Bean to initialize Overclockers scraper.
      *
-     * @return overClockers
+     * @return overclockers
      */
     @Bean
     public OverClockers overClockers() {
