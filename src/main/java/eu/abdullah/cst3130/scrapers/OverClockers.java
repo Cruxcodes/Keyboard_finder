@@ -25,7 +25,7 @@ public class OverClockers extends Thread {
     public void run() {
         chromeOptions.setHeadless(false);
         chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36");
-        KeyboardUtil keyboardColor = new KeyboardUtil();
+        KeyboardUtil keyboardUtil = new KeyboardUtil();
         HibernateMapping hibernateMapping = new HibernateMapping();
         hibernateMapping.init();
         WebDriver driver = new ChromeDriver(this.chromeOptions);
@@ -70,7 +70,7 @@ public class OverClockers extends Thread {
                 float keyPrice = Float.parseFloat(String.join("", price));
 
                 String modelValue = "";
-                if (!keyboardColor.getEnding(extractedNameAndModel[0], extractedNameAndModel[3])) {
+                if (!keyboardUtil.getEnding(extractedNameAndModel[0], extractedNameAndModel[3])) {
                     modelValue = extractedNameAndModel[1] + " " + extractedNameAndModel[2];
                 } else {
                     modelValue = extractedNameAndModel[1] + " " + extractedNameAndModel[2] + " " + extractedNameAndModel[3];
@@ -87,7 +87,7 @@ public class OverClockers extends Thread {
                 keyboardAnnotation.setBrand(extractedNameAndModel[0]);
 
                 detailsAnnotation.setShortDescription(productElements.get(j).findElement(By.cssSelector("h6.h5")).getText());
-                detailsAnnotation.setColor(keyboardColor.getColor(productElements.get(j).findElement(By.cssSelector("h6.h5")).getText()));
+                detailsAnnotation.setColor(keyboardUtil.getColor(productElements.get(j).findElement(By.cssSelector("h6.h5")).getText()));
 
 
                 WebDriver detailsDriver = new ChromeDriver(this.chromeOptions);

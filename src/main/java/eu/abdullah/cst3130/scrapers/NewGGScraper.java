@@ -15,7 +15,6 @@ import java.util.List;
 
 public class NewGGScraper extends Thread {
     ChromeOptions chromeOptions = new ChromeOptions();
-    private KeyboardUtil keyboardColor;
 
 
     /**
@@ -80,7 +79,7 @@ public class NewGGScraper extends Thread {
                 keyboardAnnotation.setModel(model);
 
                 detailsAnnotation.setShortDescription(detailsDriver.findElement(By.cssSelector("h1.product-title")).getText());
-                detailsAnnotation.setColor(keyboardColor.getColor(detailsDriver.findElement(By.cssSelector("h1.product-title")).getText()));
+                detailsAnnotation.setColor(keyboardUtil.getColor(detailsDriver.findElement(By.cssSelector("h1.product-title")).getText()));
                 keyboardAnnotation.setBrand(productTitle[0]);
                 detailsAnnotation.setImage(detailsDriver.findElement(By.cssSelector("img.product-view-img-original")).getAttribute("src"));
 

@@ -26,7 +26,7 @@ public class EbayScrapper extends Thread {
         chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36");
         HibernateMapping hibernateMapping = new HibernateMapping();
         hibernateMapping.init();
-        KeyboardUtil keyboardColor = new KeyboardUtil();
+        KeyboardUtil keyboardUtil = new KeyboardUtil();
         WebDriver driver = new ChromeDriver(this.chromeOptions);
         driver.get(" https://www.ebay.co.uk/b/bn_450742?Brand=Razer%7CCorsair%7CLogitech%7CSteelSeries&mag=1&rt=nc&_pgn=1");
 
@@ -80,7 +80,7 @@ public class EbayScrapper extends Thread {
 
                     String modelValue = "";
 //              This is the model name
-                    if (!keyboardColor.getEnding(productTitle[0], productTitle[3])) {
+                    if (!keyboardUtil.getEnding(productTitle[0], productTitle[3])) {
                         modelValue = productTitle[1] + " " + productTitle[2];
                     } else {
                         modelValue = productTitle[1] + " " + productTitle[2] + " " + productTitle[3];
@@ -95,13 +95,13 @@ public class EbayScrapper extends Thread {
                     keyboardAnnotation.setModel(model);
 
                     detailsAnnotation.setShortDescription(productName);
-                    detailsAnnotation.setColor(keyboardColor.getColor(productName));
+                    detailsAnnotation.setColor(keyboardUtil.getColor(productName));
                     keyboardAnnotation.setBrand(productTitle[0]);
                     WebElement bigImage = detailsDriver.findElement(By.cssSelector("div.ux-image-carousel-item.active"));
                     detailsAnnotation.setImage(bigImage.findElement(By.tagName("img")).getAttribute("src"));
 
                     WebElement priceString = detailsDriver.findElement(By.cssSelector("div.x-price-primary"));
-                    float price = keyboardColor.formatPrice(priceString.findElement(By.cssSelector("span.ux-textspans")).getText());
+                    float price = keyboardUtil.formatPrice(priceString.findElement(By.cssSelector("span.ux-textspans")).getText());
                     detailsDriver.quit();
                     try {
                         Thread.sleep(3000);

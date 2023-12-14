@@ -24,7 +24,7 @@ public class ArgosScraper extends Thread {
         HibernateMapping hibernateMapping = new HibernateMapping();
         hibernateMapping.init();
         WebDriver driver = new ChromeDriver(this.chromeOptions);
-        KeyboardUtil keyboardColor = new KeyboardUtil();
+        KeyboardUtil keyboardUtil = new KeyboardUtil();
         driver.get("https://www.argos.co.uk/browse/technology/computer-accessories/pc-keyboards/c:30058/brands:corsair,logitech,logitech-g,razer,steelseries/");
 
         try {
@@ -77,7 +77,7 @@ public class ArgosScraper extends Thread {
 
                 String modelValue = "";
 //              This is the model name
-                if (!keyboardColor.getEnding(nameOfProduct[0], nameOfProduct[3])) {
+                if (!keyboardUtil.getEnding(nameOfProduct[0], nameOfProduct[3])) {
                     modelValue = nameOfProduct[1] + " " + nameOfProduct[2];
                 } else {
                     modelValue = nameOfProduct[1] + " " + nameOfProduct[2] + " " + nameOfProduct[3];
@@ -92,14 +92,14 @@ public class ArgosScraper extends Thread {
                 keyboardAnnotation.setModel(model);
 
                 detailsAnnotation.setShortDescription(element.findElement(By.cssSelector("[data-test='component-product-card-title']")).getText());
-                detailsAnnotation.setColor(keyboardColor.getColor(element.findElement(By.cssSelector("[data-test='component-product-card-title']")).getText()));
+                detailsAnnotation.setColor(keyboardUtil.getColor(element.findElement(By.cssSelector("[data-test='component-product-card-title']")).getText()));
 
                 keyboardAnnotation.setBrand(nameOfProduct[0]);
                 WebElement price = element.findElement(By.cssSelector("[data-test='component-product-card-price']"));
 //                List<String> priceValues = List.of(price.findElement(By.tagName("strong")).getText().split(""));
 //                priceValues = priceValues.subList(1, priceValues.size());
 //                Float.parseFloat(String.join("", priceValues));
-                Float priceValue = keyboardColor.formatPrice(price.findElement(By.tagName("strong")).getText());
+                Float priceValue = keyboardUtil.formatPrice(price.findElement(By.tagName("strong")).getText());
                 detailsAnnotation.setKeyboardId(keyboardAnnotation.getId());
                 try {
                     WebDriver detailsDriver = new ChromeDriver(this.chromeOptions);
